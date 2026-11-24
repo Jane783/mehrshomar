@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10151b">
+<meta name="description" content="مِهرشمار؛ شمارنده و دفتر آفلاینِ تکرارها">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>مِهرشمار | دفتر تکرارها</title>
+<style>
+:root{--bg:#10151b;--panel:#1b242d;--panel2:#222e39;--gold:#d8b66a;--gold2:#f0d99d;--text:#f4f0e8;--muted:#aab4bd;--line:#34424e;--red:#d98282;--green:#8fc7a2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#263441 0,#10151b 58%);color:var(--text);font-family:Tahoma,"Segoe UI",sans-serif;min-height:100vh;padding:20px}
+main{max-width:900px;margin:auto}.top{text-align:center;margin:12px 0 24px}.eyebrow{color:var(--gold);letter-spacing:2px;font-size:12px}.top h1{font-size:30px;margin:10px 0 8px;color:var(--gold2)}.top p{color:var(--muted);margin:0;font-size:14px}
+.panel{background:linear-gradient(145deg,#202b35,#18212a);border:1px solid var(--line);border-radius:21px;padding:20px;margin:15px 0;box-shadow:0 14px 35px #0004}
+label{display:block;color:var(--muted);font-size:13px;margin:0 0 7px}input,select{width:100%;background:#111920;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:12px;font:inherit;outline:none;min-width:0}input:focus,select:focus{border-color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.count{text-align:center;padding:18px 0 10px}.count small{color:var(--muted);font-size:13px}.number{font-size:clamp(68px,15vw,108px);line-height:1.2;font-weight:700;color:var(--gold2);font-variant-numeric:tabular-nums}.targetline{color:var(--muted);font-size:13px;margin-top:6px}.bar{height:7px;background:#101820;border-radius:9px;overflow:hidden;margin:16px 0 3px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .2s}
+button{border:0;border-radius:12px;padding:12px 14px;font:inherit;font-weight:700;cursor:pointer}button:active{transform:scale(.985)}button:disabled{opacity:.35;cursor:not-allowed}.primary{background:linear-gradient(135deg,#e7cc87,#c49b4e);color:#1b2025}.big{width:100%;font-size:20px;padding:18px;margin:8px 0 11px}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.danger{background:#3b272b;color:#f0b5b5;border:1px solid #684047}.success{background:#294235;color:#bce5c9;border:1px solid #426c53}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.preset{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.preset button{flex:1;min-width:90px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.sectionhead h2{font-size:17px;margin:0;color:var(--gold2)}.muted{color:var(--muted);font-size:12px}.list{display:flex;flex-direction:column;gap:9px}.entry{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#121a21;border:1px solid var(--line);border-radius:13px;padding:12px}.entry strong{color:var(--gold2)}.entry small{display:block;color:var(--muted);margin-top:5px;font-size:11px}.entry button{padding:8px 10px;font-size:12px}.empty{text-align:center;color:var(--muted);padding:20px 8px;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#121a21;border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center}.stat strong{display:block;font-size:25px;color:var(--gold2);font-variant-numeric:tabular-nums}.stat span{color:var(--muted);font-size:12px}.barrow{display:grid;grid-template-columns:80px 1fr 55px;align-items:center;gap:9px;margin:10px 0;font-size:12px;color:var(--muted)}.barmini{height:9px;border-radius:9px;background:#101820;overflow:hidden}.barmini i{display:block;height:100%;background:linear-gradient(90deg,#b58a43,#f0d99d)}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{flex:1}.foot{text-align:center;color:#87939d;font-size:11px;margin:20px 0 8px;line-height:1.8}
+@media(max-width:560px){body{padding:12px}.panel{padding:15px}.grid2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.top h1{font-size:25px}.barrow{grid-template-columns:65px 1fr 45px}}
+</style></head>
+<body><main>
+<header class="top"><div class="eyebrow">دفتر شخصیِ تمرکز و تکرار</div><h1>مِهرشمار</h1><p>هر عبارت، مسیر خودش؛ هر جلسه، نشانی در دفتر تو</p></header>
+
+<section class="panel">
+ <div class="sectionhead"><h2>عبارت‌های من</h2><span class="muted">عبارت تازه اضافه کن یا یکی را انتخاب کن</span></div>
+ <div class="grid2">
+  <div><label for="phraseSelect">انتخاب عبارت</label><select id="phraseSelect"></select></div>
+  <div><label for="goal">هدف این جلسه</label><select id="goal"><option value="108">۱۰۸ تکرار</option><option value="40">۴۰ تکرار</option><option value="0">بدون محدودیت</option><option value="custom">تعداد دلخواه…</option></select></div>
+ </div>
+ <div id="customWrap" style="display:none;margin-top:10px"><label for="customGoal">تعداد دلخواه</label><input id="customGoal" type="number" min="1" max="100000" placeholder="مثلاً ۲۱۶"></div>
+ <div class="count"><small>تعداد تکرارهای این جلسه</small><div class="number" id="count">۰</div><div class="targetline" id="targetline">آماده‌ای؟</div><div class="bar"><span id="progress"></span></div></div>
+ <button class="primary big" id="add">＋ ثبت یک تکرار</button>
+ <div class="actions"><button class="secondary" id="undo" disabled>↶ حذف تکرار آخر</button><button class="danger" id="reset">صفر کردن شمارنده</button></div>
+ <button class="success" id="finish" style="width:100%;margin-top:11px">✓ پایان و ثبت این جلسه</button>
+ <div class="muted" style="text-align:center;margin-top:9px">جلسه فقط با زدن دکمهٔ ثبت، وارد تاریخچه می‌شود.</div>
+</section>
+
+<section class="panel">
+ <div class="sectionhead"><h2>افزودن عبارت تازه</h2></div>
+ <div class="grid2"><div><label for="newPhrase">عنوان یا متن عبارت</label><input id="newPhrase" maxlength="120" placeholder="مثلاً: من آرام و متمرکز هستم"></div><div style="display:flex;align-items:end"><button class="primary" id="addPhrase" style="width:100%">＋ افزودن عبارت</button></div></div>
+ <div class="muted" style="margin-top:9px">هیچ عبارت پیش‌فرضی وجود ندارد؛ فقط عبارت‌هایی که خودت اضافه می‌کنی نمایش داده می‌شوند.</div>
+ <div id="phraseManage" class="list" style="margin-top:14px"></div>
+</section>
+
+<section class="panel">
+ <div class="sectionhead"><h2>نمای کلی پیشرفت</h2><span class="muted">بر اساس جلسات ثبت‌شده</span></div>
+ <div class="stats">
+  <div class="stat"><strong id="todayTotal">۰</strong><span>تکرار امروز</span></div>
+  <div class="stat"><strong id="weekTotal">۰</strong><span>تکرار این هفته</span></div>
+  <div class="stat"><strong id="allTotal">۰</strong><span>مجموع کل</span></div>
+ </div>
+ <div style="margin-top:18px"><div class="muted" style="margin-bottom:8px">هفت روز اخیر</div><div id="weeklyChart"></div></div>
+</section>
+
+<section class="panel">
+ <div class="sectionhead"><h2>تاریخچهٔ جلسات</h2><span class="muted" id="sessionCount"></span></div>
+ <div class="list" id="history"></div>
+</section>
+
+<section class="panel">
+ <div class="sectionhead"><h2>پشتیبان‌گیری</h2></div>
+ <div class="toolbar"><button class="secondary" id="export">⬇ دریافت فایل پشتیبان</button><button class="secondary" id="importBtn">⬆ بازیابی پشتیبان</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+ <div class="muted" style="margin-top:10px">پیشنهاد می‌کنم هر چند وقت یک‌بار فایل پشتیبان بگیری. اطلاعات این نسخه روی همین مرورگر ذخیره می‌شود.</div>
+</section>
+<div class="foot">مِهرشمار آفلاین است. پاک‌کردن داده‌های مرورگر ممکن است تاریخچه را از بین ببرد؛ فایل پشتیبان را در جای امن نگه دار.</div>
+</main>
+<script>
+const $=id=>document.getElementById(id), KEY='mehrshomar_v2';
+const placeholders=['عبارت خودتلقینی اول','عبارت خودتلقینی دوم'];
+let data={phrases:[],sessions:[]}, count=0, selected='';
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&Array.isArray(saved.phrases)&&Array.isArray(saved.sessions))data=saved}catch(e){}
+data.phrases=data.phrases.filter(p=>!placeholders.includes(p));
+selected=data.phrases[0]||'';
+const fa=n=>Number(n||0).toLocaleString('fa-IR');
+function persist(){localStorage.setItem(KEY,JSON.stringify(data))}
+function goalValue(){let v=$('goal').value;if(v==='0')return 0;if(v==='custom')return Math.max(1,parseInt($('customGoal').value,10)||1);return Number(v)}
+function refreshSelect(){let s=$('phraseSelect');s.innerHTML='<option value="">— ابتدا یک عبارت اضافه کن —</option>'+data.phrases.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');s.value=selected||'';$('phraseSelect').disabled=data.phrases.length===0;$('add').disabled=data.phrases.length===0;$('finish').disabled=data.phrases.length===0;$('phraseManage').innerHTML=data.phrases.length?data.phrases.map((p,i)=>`<div class="entry"><div><strong>${esc(p)}</strong><small>عبارت ${fa(i+1)}</small></div><div style="display:flex;gap:6px"><button class="secondary" data-rename="${i}">ویرایش نام</button><button class="danger" data-remove="${i}">حذف</button></div></div>`).join(''):'<div class="empty">هنوز عبارتی اضافه نکرده‌ای. از بخش بالا عبارت دلخواهت را بساز.</div>';
+$('phraseManage').querySelectorAll('[data-rename]').forEach(b=>b.addEventListener('click',()=>{let i=Number(b.dataset.rename),old=data.phrases[i],next=prompt('نام جدید عبارت را وارد کن:',old);if(next===null)return;next=next.trim();if(!next)return;if(data.phrases.some((x,j)=>j!==i&&x===next)){alert('این نام از قبل وجود دارد.');return}data.phrases[i]=next;if(selected===old)selected=next;persist();renderAll()}));
+$('phraseManage').querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{let i=Number(b.dataset.remove),old=data.phrases[i];if(!confirm('این عبارت از فهرست حذف شود؟ جلسات ثبت‌شدهٔ قبلی در تاریخچه باقی می‌مانند.'))return;data.phrases.splice(i,1);if(selected===old){selected=data.phrases[0]||'';count=0}persist();renderAll()}));
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderCounter(){let g=goalValue();$('count').textContent=fa(count);$('undo').disabled=count===0;$('targetline').textContent=!selected?'ابتدا یک عبارت به فهرست اضافه کن':(g?`${fa(count)} از ${fa(g)} تکرار`:`${fa(count)} تکرار · بدون محدودیت`);$('progress').style.width=g?Math.min(100,count/g*100)+'%':'0%';$('finish').textContent=g&&count>=g?'✓ هدف کامل شد؛ ثبت جلسه':'✓ پایان و ثبت این جلسه'}
+function dayKey(d){let x=new Date(d);return `${x.getFullYear()}-${x.getMonth()+1}-${x.getDate()}`}
+function renderStats(){
+ let now=new Date(), today=dayKey(now), totals=0,todayN=0,weekN=0;
+ let mondayOffset=(now.getDay()+6)%7, monday=new Date(now.getFullYear(),now.getMonth(),now.getDate()-mondayOffset);
+ let sunday=new Date(monday.getFullYear(),monday.getMonth(),monday.getDate()+6);
+ data.sessions.forEach(s=>{let d=new Date(s.date);totals+=s.count;if(dayKey(d)===today)todayN+=s.count;if(d>=monday&&d<new Date(sunday.getFullYear(),sunday.getMonth(),sunday.getDate()+1))weekN+=s.count});
+ $('todayTotal').textContent=fa(todayN);$('weekTotal').textContent=fa(weekN);$('allTotal').textContent=fa(totals);
+ let days=[];for(let i=0;i<7;i++){let d=new Date(monday.getFullYear(),monday.getMonth(),monday.getDate()+i);let k=dayKey(d),n=data.sessions.filter(s=>dayKey(s.date)===k).reduce((a,s)=>a+s.count,0);days.push({label:d.toLocaleDateString('fa-IR',{weekday:'long'}),n})}
+ let max=Math.max(1,...days.map(x=>x.n));$('weeklyChart').innerHTML=days.map(x=>`<div class="barrow"><span>${x.label}</span><div class="barmini"><i style="width:${x.n/max*100}%"></i></div><span>${fa(x.n)}</span></div>`).join('');
+}
+function renderHistory(){
+ $('sessionCount').textContent=`${fa(data.sessions.length)} جلسه`;
+ let h=$('history');if(!data.sessions.length){h.innerHTML='<div class="empty">هنوز جلسه‌ای ثبت نشده است.</div>';return}
+ h.innerHTML=data.sessions.slice().reverse().map(s=>`<div class="entry"><div><strong>${fa(s.count)} تکرار</strong><small>${esc(s.phrase)} · هدف: ${s.goal?fa(s.goal):'بدون محدودیت'} · ${new Date(s.date).toLocaleString('fa-IR')}</small></div><button class="danger" data-id="${s.id}">حذف</button></div>`).join('');
+ h.querySelectorAll('[data-id]').forEach(b=>b.addEventListener('click',()=>{if(confirm('این جلسه از تاریخچه حذف شود؟')){data.sessions=data.sessions.filter(s=>s.id!==b.dataset.id);persist();renderAll()}}));
+}
+function renderAll(){refreshSelect();renderCounter();renderStats();renderHistory()}
+$('phraseSelect').addEventListener('change',e=>{selected=e.target.value;count=0;renderCounter()});
+$('goal').addEventListener('change',()=>{$('customWrap').style.display=$('goal').value==='custom'?'block':'none';renderCounter()});
+$('customGoal').addEventListener('input',renderCounter);
+$('add').addEventListener('click',()=>{if(!selected)return;count++;renderCounter()});
+$('undo').addEventListener('click',()=>{if(count>0)count--;renderCounter()});
+$('reset').addEventListener('click',()=>{if(count&&confirm('شمارندهٔ فعلی صفر شود؟ این جلسه ثبت نخواهد شد.')){count=0;renderCounter()}});
+$('finish').addEventListener('click',()=>{if(!selected){alert('ابتدا یک عبارت اضافه و انتخاب کن.');return}if(!count){alert('هنوز تکراری ثبت نشده است.');return}let g=goalValue();data.sessions.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),phrase:selected,count,goal:g,date:new Date().toISOString()});persist();count=0;renderAll()});
+$('addPhrase').addEventListener('click',()=>{let p=$('newPhrase').value.trim();if(!p)return;if(data.phrases.includes(p)){alert('این عبارت از قبل وجود دارد.');return}data.phrases.push(p);selected=p;count=0;$('newPhrase').value='';persist();renderAll()});
+$('export').addEventListener('click',()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mehrshomar-backup.json';a.click();URL.revokeObjectURL(url)});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{let f=e.target.files[0];if(!f)return;try{let x=JSON.parse(await f.text());if(!Array.isArray(x.phrases)||!Array.isArray(x.sessions))throw Error();if(confirm('اطلاعات فعلی با محتوای فایل پشتیبان جایگزین شود؟')){data=x;selected=data.phrases[0]||'';count=0;persist();renderAll()}}catch(err){alert('فایل پشتیبان معتبر نیست.')}e.target.value=''});
+renderAll();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+ window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.warn('Service worker registration failed:',err)));
+}
+</script></body></html>
